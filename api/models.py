@@ -1,11 +1,14 @@
+from django.utils import timezone
 from django.db import models
+from datetime import date, datetime
 
 # Create your models here.
 class Booking(models.Model):
     name = models.CharField(max_length=255)
     table_no = models.IntegerField(default=0)
     no_of_guests = models.IntegerField()
-    booking_date = models.DateTimeField()
+    booking_datetime = models.DateTimeField()
+
     
     
 class Menu(models.Model):
