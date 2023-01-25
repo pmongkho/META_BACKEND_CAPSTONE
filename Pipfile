@@ -9,6 +9,7 @@ mysqlclient = "*"
 django-rest-framework = "*"
 djoser = "*"
 django-cors-headers = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 
