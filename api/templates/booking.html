@@ -7,13 +7,13 @@ no_of_guests = models.IntegerField()
 booking_date = models.DateTimeField() {% endcomment %}
 <section>
     {% csrf_token %}
-<div class="row">
+<div class="row mt-5">
     <div class="col">
         <h1>Reserve your Table</h1>
 <form method="POST" id="form">
 
     <div class="form-group ">
-        <label for="name"></label>
+        <label for="name">Name</label>
         <input
             type="text"
             placeholder="Your Name"
@@ -24,7 +24,7 @@ booking_date = models.DateTimeField() {% endcomment %}
         />
     </div>    
     <div class="form-group">
-        <label for="table_no"></label>
+        <label for="table_no">Table Number</label>
         <input
             type="number"
             placeholder="Table #"
@@ -34,7 +34,7 @@ booking_date = models.DateTimeField() {% endcomment %}
         />
     </div>
     <div class="form-group">
-        <label for="no_of_guests"></label>
+        <label for="no_of_guests">Number of Guests</label>
         <input
             type="number"
             placeholder="# of Guests"
@@ -44,7 +44,7 @@ booking_date = models.DateTimeField() {% endcomment %}
         />
     </div>
     <div class="form-group">
-        <label for="booking_datetime"></label>
+        <label for="booking_datetime">Date Time</label>
         <input
             type="datetime-local"
             placeholder="Booking Date"
@@ -94,7 +94,7 @@ booking_date = models.DateTimeField() {% endcomment %}
         return cookie ? cookie[2] : null;
     }
     document.getElementById("button").addEventListener("click", async function (e) {
-		const formdata = {
+		const formData = {
 			name: document.getElementById("name").value,
 			table_no: document.getElementById("table_no").value,
 			no_of_guests: document.getElementById("no_of_guests").value,
@@ -108,7 +108,7 @@ booking_date = models.DateTimeField() {% endcomment %}
                 'Content-Type': 'application/json',
                 "X-CSRFToken": getCookie("csrftoken"),
             },
-			body: JSON.stringify(formdata),
+			body: JSON.stringify(formData),
 		})
         .then((response)=>console.log(response))
         .then((data)=>console.log(data))
