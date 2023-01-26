@@ -8,7 +8,10 @@ class Booking(models.Model):
     table_no = models.IntegerField(default=0)
     no_of_guests = models.IntegerField()
     booking_datetime = models.DateTimeField()
-
+    
+    def __str__(self) -> str:
+        return self.name +"  "+ str(self.booking_datetime)
+ 
     class Meta:
         unique_together = ('booking_datetime', 'table_no',)
     
@@ -16,6 +19,7 @@ class Menu(models.Model):
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     inventory = models.IntegerField()
+    description = models.CharField(max_length=1000, default="")
     
     def __str__(self):
         return f'{self.title} : {str(self.price)}'

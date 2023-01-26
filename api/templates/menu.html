@@ -1,27 +1,27 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} {% block content %} {% load static %}
 
-{% block content %}
-    {% load static %}
+<h1 class="mt-5 text-center">Menu Items</h1>
+<div class="row">
+	<div class="col d-flex flex-wrap justify-content-around">
+		{% for item in content %}
+		<a href="/menu-items/{{item.id}}">
+			<div class="card text-center" style="width: 250px">
+				<div class="card-body">
+					<img
+						class="card-img-top"
+						src="http://127.0.0.1:8000/static/images/{{item.title}}.jpeg"
+						alt="{{item.title}}"
+						width="200"
+						height="150"
+					/>
 
-   
-    
-        <h1 class="mt-5 text-center">Menu Items</h1>
-        <div class="row">
-            <div class="col d-flex flex-wrap justify-content-around">
-        {% for item in content  %}
+					<h5 class="card-title">{{item.title}}</h5>
+					<h5 class="card-title">${{item.price}}</h5>
+				</div>
+			</div>
+		</a>
+		{% endfor %}
+	</div>
+</div>
 
-            <div  class="card text-center" style="width: 250px;">
-            <div class="card-body">
-                <img class="card-img-top" src="http://127.0.0.1:8000/static/images/{{item.title}}.jpeg" alt={{item.title}} width="200" height="150" >
-
-                <h5 class="card-title">{{item.title}}</h5>
-                <h5 class="card-title">${{item.price}}</h5>
-            </div>
-                </div>  
-        {% endfor %}
-                    </div>
-                      
-  </div>
-    
 {% endblock content %}
-    

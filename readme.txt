@@ -1,4 +1,4 @@
 routes
 
-api/menu-items
-api/booking
+menu-items
+booking
