@@ -3,13 +3,13 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser,AllowAny
 from rest_framework.views import APIView
+from rest_framework.viewsets import ViewSet, ModelViewSet
 from .models import *
 from .serializers import *
 from django.contrib.auth.forms import AuthenticationForm #add this
-from django.contrib.auth import login, authenticate #add this
+from django.contrib.auth import login, authenticate, logout #add this
 from rest_framework.response import Response
 from .forms import NewUserForm
-from django.contrib.auth import login, logout
 from django.contrib import messages
 
 # Create your views here.
@@ -52,20 +52,26 @@ def login_request(request):
 	form = AuthenticationForm()
 	return render(request=request, template_name="login.html", context={"login_form":form})
 
-class MenuItemView(generics.ListCreateAPIView,APIView):
+
+class MenuItemView(generics.ListAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, AllowAny]
     template_name = 'menu.html'
     
     def get(self, request):
         content = Menu.objects.all()
         return render(request, self.template_name, {'content':content})
     
-class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView):
+class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView,generics.CreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
     permission_classes = [IsAuthenticated]
+    template_name = "menu__item.html"
+    
+    def get(self, request, **kwargs):
+        content = Menu.objects.get(pk=self.kwargs.get('pk'))
+        return render(request, self.template_name, {'content':content})
 
     
 class BookingViewSet(APIView):
@@ -82,12 +88,19 @@ class BookingViewSet(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)   
+        return render(request, self.template_name)   
     
 class SingleBookingViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
+    template_name = "booking__item.html"
+    
+    # def get(self, request, **kwargs):
+    #     content = Booking.objects.get(pk=self.kwargs.get('pk'))
+    #     return render(request, self.template_name, {'content':content})
+    
+    
 
     
     
