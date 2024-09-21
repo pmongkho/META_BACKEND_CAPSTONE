@@ -161,6 +161,7 @@ REST_FRAMEWORK = {
 
 #add the following line
 DJOSER={"USER_ID_FIELD":"username"}
+SESSION_COOKIE_SECURE = True
 
 # CORS_ORIGIN_WHITELIST = (
 #     'http://localhost:3000',
